@@ -1,5 +1,7 @@
 import sys
 import os
+import time
+import xlsxwriter
 
 ##Do you guys think keeping these as global vars is okay?
 denoms = []
@@ -23,6 +25,32 @@ def getInputData(filename):
             else:
                 amounts.append(int(line))
  
+def timeFunction(functionToCall, inputSizes):
+    timeList = []
+    #go through all input Sizes
+    for i in inputSizes:
+        VLists = []
+        #need to make 10 arrays given
+        for j in range(10):
+            VLists = []
+            #append i random integers to a list
+            for k in range(i):
+                a.append(random.randint(-1000,1000))
+            currLists.append(a)
+            
+            
+        #currLists now holds 10 arrays of size i
+        #call and time the function with 10 different arrays for each inputSize
+        times = []
+        for j in range(10):                          
+            startTime = time.time()
+            functionToCall(currLists[j])
+            times.append(time.time() - startTime)
+        avgTime = sum(times) / 10.0
+        timeList.append(avgTime) #timeList holds the averages for all
+    return timeList
+
+
 '''
 Used "Coin Changing Minimum Coins Dynamic Programming"
 at https://www.youtube.com/watch?v=NJuKJ8sasGk&t=953s
@@ -53,18 +81,140 @@ def changedp(A, V):
         C[coinUsed[index]] += 1
         index -= V[coinUsed[index]]
     return C
-            
 
+'''
+Takes in function of algorithm
+returns a list of the number of coins for each A
+also prints time taken for each A
+'''
+def problem3(function):
+    V = [1, 5, 10, 25, 50]
+    A = []
+    timeList = []
+    numCoinsList = []
+    for i in range(2010, 2201, 5): #might need to change these
+        A.append(i)
+    for i in A:
+        startTime = time.time()
+        C = function(i, V)
+        timeList.append(time.time() - startTime)
+        numCoinsList.append(sum(C))
+
+    outputData(A, numCoinsList, timeList, 'problem3.xlsx')
+    '''
+    print("Times for each amount:")
+    for i in range(len(A)):
+        print( "A = " + str(A[i]) + ": " + str(timeList[i]) + "sec")
+    '''
+    return numCoinsList
+    
+def problem4V1(function):
+    V = [1, 2, 6, 12, 24, 48, 60]
+    A = []
+    timeList = []
+    numCoinsList = []
+    for i in range(2010, 2201, 5): #might need to change these
+        A.append(i)
+    for i in A:
+        startTime = time.time()
+        C = function(i, V)
+        timeList.append(time.time() - startTime)
+        numCoinsList.append(sum(C))
+
+    outputData(A, numCoinsList, timeList, 'problem4V1.xlsx')
+    '''
+    print("Problem 4 for list V1")
+    print("Times for each amount:")
+    for i in range(len(A)):
+        print( "A = " + str(A[i]) + ": " + str(timeList[i]) + "sec")
+    '''
+    return numCoinsList
+
+def problem4V2(function):
+    V = [1, 6, 13, 37, 150]
+    A = []
+    timeList = []
+    numCoinsList = []
+    for i in range(2010, 2201, 5): #might need to change these
+        A.append(i)
+    for i in A:
+        startTime = time.time()
+        C = function(i, V)
+        timeList.append(time.time() - startTime)
+        numCoinsList.append(sum(C))
+
+    outputData(A, numCoinsList, timeList, 'problem4V2.xlsx')
+    '''
+    print("Problem 4 for list V2")
+    print("Times for each amount:")
+    for i in range(len(A)):
+        print( "A = " + str(A[i]) + ": " + str(timeList[i]) + "sec")
+    '''
+    return numCoinsList  
+
+def problem5(function):
+    V = []
+    for i in range(30):
+        V.append(i+1)
+    A = []
+    timeList = []
+    numCoinsList = []
+    for i in range(2000, 2201): #might need to change these
+        A.append(i)
+    for i in A:
+        startTime = time.time()
+        C = function(i, V)
+        timeList.append(time.time() - startTime)
+        numCoinsList.append(sum(C))
+    outputData(A, numCoinsList, timeList, 'problem5.xlsx')
+    '''
+    print("Problem 5")
+    print("Times for each amount:")
+    for i in range(len(A)):
+        print( "A = " + str(A[i]) + ": " + str(timeList[i]) + "sec")
+    '''
+    return numCoinsList  
+
+def outputData(A, numCoinsList, timeList, filename):
+    workbook = xlsxwriter.Workbook(filename)
+    worksheet = workbook.add_worksheet()
+    row = 0
+    col = 0
+    for i in range(len(A)):
+        worksheet.write(row, 0, A[i])
+        worksheet.write(row, 1, timeList[i])
+        worksheet.write(row, 2, numCoinsList[i])
+        row += 1
+    workbook.close()
+    
 #Return usage error if incorrect number of arguments
 if len(sys.argv) != 2:
     print "Usage: " + os.path.basename(__file__) + " <input filename>"
 
+
+
+'''
+This command takes in the data from a file and
+fills global list amounts and list of lists denoms
+where amounts[i] corresponds to denoms[i]
+'''
+'''
 getInputData(sys.argv[1])
-
-
-
 for i in range(len(amounts)):
-    print(changedp(amounts[i], denoms[i]))
+    C = changedp(amounts[i], denoms[i])
+    print "C = ",
+    print C,
+    print "; m = " + str(sum(C))
+'''
+'''
+These commands will print the list of the number of coins for each
+amount asked for in the problems. They will also output time data
+to problemX.xlsx, with the amount, A, in the first column, number of coins
+in the 2nd, and time in the 3rd.
+'''
 
-
+print(problem3(changedp))
+print(problem4V1(changedp))
+print(problem4V2(changedp))
+print(problem5(changedp))
 
