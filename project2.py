@@ -82,6 +82,20 @@ def changedp(A, V):
         index -= V[coinUsed[index]]
     return C
 
+def changegreedy(A, V):
+	coinsUsed = []
+	count = 0
+	
+	for i in reversed(V):
+		while V[i] <= A:
+			A-= V[i]
+			coinsUsed.append(V[i]) 
+			count += 1		
+	
+	return coinsUsed
+		
+	
+	
 '''
 Takes in function of algorithm
 returns a list of the number of coins for each A
@@ -217,4 +231,9 @@ print(problem3(changedp))
 print(problem4V1(changedp))
 print(problem4V2(changedp))
 print(problem5(changedp))
+
+print(problem3(changegreedy))
+print(problem4V1(changegreedy))
+print(problem4V2(changegreedy))
+print(problem5(changegreedy))
 
