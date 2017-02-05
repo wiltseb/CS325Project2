@@ -98,8 +98,8 @@ def changegreedy(A, V):
 		if (A >= V[x]):
 			A -= V[x]
 			coinsCount[x] += 1
-	else:
-		x -= 1		
+		else:
+			x -= 1		
 	
 	return coinsCount
 		
