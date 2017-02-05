@@ -24,7 +24,7 @@ def getInputData(filename):
                 denoms.append(line)
             else:
                 amounts.append(int(line))
- 
+
 def timeFunction(functionToCall, inputSizes):
     timeList = []
     #go through all input Sizes
@@ -37,12 +37,12 @@ def timeFunction(functionToCall, inputSizes):
             for k in range(i):
                 a.append(random.randint(-1000,1000))
             currLists.append(a)
-            
-            
+
+
         #currLists now holds 10 arrays of size i
         #call and time the function with 10 different arrays for each inputSize
         times = []
-        for j in range(10):                          
+        for j in range(10):
             startTime = time.time()
             functionToCall(currLists[j])
             times.append(time.time() - startTime)
@@ -50,6 +50,40 @@ def timeFunction(functionToCall, inputSizes):
         timeList.append(avgTime) #timeList holds the averages for all
     return timeList
 
+'''
+Brute Force algorithm
+'''
+def changeslow(A, V):
+    C = []
+    changeMade = 0
+    denomCoins = {}
+    for i in V:
+        C.append(0)
+
+    for i in range(len(V)):
+        coin = V[i]
+        denom = V[i]
+        denomCoins[denom] = [0, C[:]]
+        while changeMade < A:
+            if changeMade + coin <= A:
+                denomCoins[denom][0] += 1
+                denomCoins[denom][1][i] += 1
+                changeMade += coin
+
+            else:
+                for j in reversed(range(i)):
+                    coin = V[j]
+                    while changeMade + coin <= A:
+                        denomCoins[denom][0] += 1
+                        denomCoins[denom][1][j] += 1
+                        changeMade += coin
+
+        changeMade = 0
+
+    lowestCombination = min(denomCoins.values())
+    lowestList = lowestCombination[1]
+    C = lowestList[:]
+    return C
 
 '''
 Used "Coin Changing Minimum Coins Dynamic Programming"
@@ -84,14 +118,14 @@ def changedp(A, V):
 
 '''Greedy algorithm
 '''
- 
+
 def changegreedy(A, V):
 	coinsCount = [0 for x in range(len(V))]
 	#V.reverse()
 	#for i in V:
 	#	while A >= i:
 	#		A -= i
-	#		coinsUsed.append(i) 
+	#		coinsUsed.append(i)
 	x = len(V) - 1
 
 	while(A > 0):
@@ -99,12 +133,12 @@ def changegreedy(A, V):
 			A -= V[x]
 			coinsCount[x] += 1
 		else:
-			x -= 1		
-	
+			x -= 1
+
 	return coinsCount
-		
-	
-	
+
+
+
 '''
 Takes in function of algorithm
 returns a list of the number of coins for each A
@@ -130,7 +164,7 @@ def problem3(function):
         print( "A = " + str(A[i]) + ": " + str(timeList[i]) + "sec")
     '''
     return numCoinsList
-    
+
 def problem4V1(function):
     V = [1, 2, 6, 12, 24, 48, 60]
     A = []
@@ -173,7 +207,7 @@ def problem4V2(function):
     for i in range(len(A)):
         print( "A = " + str(A[i]) + ": " + str(timeList[i]) + "sec")
     '''
-    return numCoinsList  
+    return numCoinsList
 
 def problem5(function):
     V = []
@@ -196,7 +230,7 @@ def problem5(function):
     for i in range(len(A)):
         print( "A = " + str(A[i]) + ": " + str(timeList[i]) + "sec")
     '''
-    return numCoinsList  
+    return numCoinsList
 
 def outputData(A, numCoinsList, timeList, filename):
     workbook = xlsxwriter.Workbook(filename)
@@ -209,7 +243,7 @@ def outputData(A, numCoinsList, timeList, filename):
         worksheet.write(row, 2, numCoinsList[i])
         row += 1
     workbook.close()
-    
+
 #Return usage error if incorrect number of arguments
 if len(sys.argv) != 2:
     print "Usage: " + os.path.basename(__file__) + " <input filename>"
@@ -248,4 +282,8 @@ print(problem4V1(changegreedy))
 print(problem4V2(changegreedy))
 print(problem5(changegreedy))
 
+print(problem3(changeslow))
+print(problem4V1(changeslow))
+print(problem4V2(changeslow))
+print(problem5(changeslow))
 
