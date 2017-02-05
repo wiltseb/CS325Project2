@@ -51,39 +51,26 @@ def timeFunction(functionToCall, inputSizes):
     return timeList
 
 '''
-Brute Force algorithm
+Divide and Conquer Algorithm
 '''
 def changeslow(A, V):
     C = []
-    changeMade = 0
-    denomCoins = {}
-    for i in V:
+    for c in V:
         C.append(0)
+    numC = 0
+    if A in V:
+        C[V.index(A)] += 1
+    else:
+        for i in range(1, A):
+            C1 = changeslow(i, V)
+            C2 = changeslow(A - i, V)
+            numC1 = sum(C1)
+            numC2 = sum(C2)
+            if numC1 + numC2 < numC or numC == 0:
+                numC = numC1 + numC2
+                C = [a + b for a, b in zip(C1, C2)]
+    return C;
 
-    for i in range(len(V)):
-        coin = V[i]
-        denom = V[i]
-        denomCoins[denom] = [0, C[:]]
-        while changeMade < A:
-            if changeMade + coin <= A:
-                denomCoins[denom][0] += 1
-                denomCoins[denom][1][i] += 1
-                changeMade += coin
-
-            else:
-                for j in reversed(range(i)):
-                    coin = V[j]
-                    while changeMade + coin <= A:
-                        denomCoins[denom][0] += 1
-                        denomCoins[denom][1][j] += 1
-                        changeMade += coin
-
-        changeMade = 0
-
-    lowestCombination = min(denomCoins.values())
-    lowestList = lowestCombination[1]
-    C = lowestList[:]
-    return C
 
 '''
 Used "Coin Changing Minimum Coins Dynamic Programming"
