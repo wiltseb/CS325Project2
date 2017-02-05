@@ -86,7 +86,7 @@ def changedp(A, V):
 '''
  
 def changegreedy(A, V):
-	coinsCount = [0 for x in range(len(V)]
+	coinsCount = [0 for x in range(len(V))]
 	#V.reverse()
 	#for i in V:
 	#	while A >= i:
