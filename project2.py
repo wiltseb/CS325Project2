@@ -100,7 +100,7 @@ def changegreedy(A, V):
 			coinsCount[x] += 1
 	else:
 		x -= 1		
-	return coinsUsed
+	return coinsCount
 		
 	
 	
