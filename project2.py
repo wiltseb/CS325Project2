@@ -82,16 +82,22 @@ def changedp(A, V):
         index -= V[coinUsed[index]]
     return C
 
+'''Greedy algorithm
+'''
+ 
 def changegreedy(A, V):
 	coinsUsed = []
 	count = 0
 	
 	for i in reversed(V):
 		while V[i] <= A:
-			A-= V[i]
+			A -= V[i]
 			coinsUsed.append(V[i]) 
 			count += 1		
-	
+
+
+
+		
 	return coinsUsed
 		
 	
@@ -213,12 +219,13 @@ fills global list amounts and list of lists denoms
 where amounts[i] corresponds to denoms[i]
 '''
 '''
-getInputData(sys.argv[1])
-for i in range(len(amounts)):
-    C = changedp(amounts[i], denoms[i])
+getInputData(coins, numCoins)
+for i in range(len(coins)):
+    C = changegreedy(amounts[i], denoms[i])
     print "C = ",
     print C,
     print "; m = " + str(sum(C))
+
 '''
 '''
 These commands will print the list of the number of coins for each
@@ -226,12 +233,12 @@ amount asked for in the problems. They will also output time data
 to problemX.xlsx, with the amount, A, in the first column, number of coins
 in the 2nd, and time in the 3rd.
 '''
-
+'''
 print(problem3(changedp))
 print(problem4V1(changedp))
 print(problem4V2(changedp))
 print(problem5(changedp))
-
+'''
 print(problem3(changegreedy))
 print(problem4V1(changegreedy))
 print(problem4V2(changegreedy))
