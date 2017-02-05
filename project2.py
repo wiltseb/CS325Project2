@@ -96,7 +96,7 @@ def changegreedy(A, V):
 
 	while(A > 0):
 		if (A >= V[x]):
-			change -= V[x]
+			A -= V[x]
 			coinsCount[x] += 1
 	else:
 		x -= 1		
