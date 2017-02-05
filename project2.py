@@ -242,10 +242,10 @@ print(problem4V1(changedp))
 print(problem4V2(changedp))
 print(problem5(changedp))
 '''
-'''
+
 print(problem3(changegreedy))
 print(problem4V1(changegreedy))
 print(problem4V2(changegreedy))
 print(problem5(changegreedy))
-'''
+
 
