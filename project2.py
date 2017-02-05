@@ -95,11 +95,11 @@ def changegreedy(A, V):
 	x = len(V) - 1
 
 	while(A > 0):
-		if (A >= V[i]):
-			change -= V[i]
-			coinsCount[i] += 1
+		if (A >= V[x]):
+			change -= V[x]
+			coinsCount[x] += 1
 	else:
-		i -= 1		
+		x -= 1		
 	return coinsUsed
 		
 	
