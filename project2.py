@@ -236,12 +236,12 @@ amount asked for in the problems. They will also output time data
 to problemX.xlsx, with the amount, A, in the first column, number of coins
 in the 2nd, and time in the 3rd.
 '''
-'''
+
 print(problem3(changedp))
 print(problem4V1(changedp))
 print(problem4V2(changedp))
 print(problem5(changedp))
-'''
+
 
 print(problem3(changegreedy))
 print(problem4V1(changegreedy))
