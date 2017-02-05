@@ -218,7 +218,7 @@ fills global list amounts and list of lists denoms
 where amounts[i] corresponds to denoms[i]
 '''
 
-getInputData(amounts, denoms)
+getInputData(sys.argv[1])
 for i in range(len(amounts)):
     C = changegreedy(amounts[i], denoms[i])
     print "C = ",
