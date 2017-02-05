@@ -92,7 +92,7 @@ def changegreedy(A, V):
 		while A >= i:
 			A -= i
 			coinsUsed.append(i) 
-			count += 1		
+			
 
 
 
