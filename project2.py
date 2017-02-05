@@ -90,7 +90,7 @@ def changegreedy(A, V):
 	count = 0
 	
 	for i in reversed(V):
-		while V[i] <= A:
+		while A >= V[i]:
 			A -= V[i]
 			coinsUsed.append(V[i]) 
 			count += 1		
