@@ -198,7 +198,7 @@ def problem5(function):
     A = []
     timeList = []
     numCoinsList = []
-    for i in range(2000, 2201): #might need to change these
+    for i in range(10000000, 20000000, 1000000): #might need to change these
         A.append(i)
     for i in A:
         startTime = time.clock()
