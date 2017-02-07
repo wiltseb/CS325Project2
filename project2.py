@@ -43,9 +43,9 @@ def timeFunction(functionToCall, inputSizes):
         #call and time the function with 10 different arrays for each inputSize
         times = []
         for j in range(10):
-            startTime = time.time()
+            startTime = time.clock()
             functionToCall(currLists[j])
-            times.append(time.time() - startTime)
+            times.append(time.clock() - startTime)
         avgTime = sum(times) / 10.0
         timeList.append(avgTime) #timeList holds the averages for all
     return timeList
@@ -121,11 +121,6 @@ def changedp(A, V):
 
 def changegreedy(A, V):
 	coinsCount = [0 for x in range(len(V))]
-	#V.reverse()
-	#for i in V:
-	#	while A >= i:
-	#		A -= i
-	#		coinsUsed.append(i)
 	x = len(V) - 1
 
 	while(A > 0):
@@ -152,9 +147,9 @@ def problem3(function):
     for i in range(2010, 2201, 5): #might need to change these
         A.append(i)
     for i in A:
-        startTime = time.time()
+        startTime = time.clock()
         C = function(i, V)
-        timeList.append(time.time() - startTime)
+        timeList.append(time.clock() - startTime)
         numCoinsList.append(sum(C))
 
     outputData(A, numCoinsList, timeList, 'problem3.xlsx')
@@ -173,9 +168,9 @@ def problem4V1(function):
     for i in range(2010, 2201, 5): #might need to change these
         A.append(i)
     for i in A:
-        startTime = time.time()
+        startTime = time.clock()
         C = function(i, V)
-        timeList.append(time.time() - startTime)
+        timeList.append(time.clock() - startTime)
         numCoinsList.append(sum(C))
 
     outputData(A, numCoinsList, timeList, 'problem4V1.xlsx')
@@ -195,9 +190,9 @@ def problem4V2(function):
     for i in range(2010, 2201, 5): #might need to change these
         A.append(i)
     for i in A:
-        startTime = time.time()
+        startTime = time.clock()
         C = function(i, V)
-        timeList.append(time.time() - startTime)
+        timeList.append(time.clock() - startTime)
         numCoinsList.append(sum(C))
 
     outputData(A, numCoinsList, timeList, 'problem4V2.xlsx')
@@ -219,9 +214,9 @@ def problem5(function):
     for i in range(2000, 2201): #might need to change these
         A.append(i)
     for i in A:
-        startTime = time.time()
+        startTime = time.clock()
         C = function(i, V)
-        timeList.append(time.time() - startTime)
+        timeList.append(time.clock() - startTime)
         numCoinsList.append(sum(C))
     outputData(A, numCoinsList, timeList, 'problem5.xlsx')
     '''
