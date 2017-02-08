@@ -1,7 +1,7 @@
 import sys
 import os
 import time
-import xlsxwriter
+
 
 ##Do you guys think keeping these as global vars is okay?
 denoms = []
@@ -139,7 +139,7 @@ def problem3(function):
         timeList.append(time.clock() - startTime)
         numCoinsList.append(sum(C))
 
-    outputData(A, numCoinsList, timeList, 'problem3.xlsx')
+   # outputData(A, numCoinsList, timeList, 'problem3.xlsx')
     '''
     print("Times for each amount:")
     for i in range(len(A)):
@@ -160,7 +160,7 @@ def problem4V1(function):
         timeList.append(time.clock() - startTime)
         numCoinsList.append(sum(C))
 
-    outputData(A, numCoinsList, timeList, 'problem4V1.xlsx')
+  #  outputData(A, numCoinsList, timeList, 'problem4V1.xlsx')
     '''
     print("Problem 4 for list V1")
     print("Times for each amount:")
@@ -182,7 +182,7 @@ def problem4V2(function):
         timeList.append(time.clock() - startTime)
         numCoinsList.append(sum(C))
 
-    outputData(A, numCoinsList, timeList, 'problem4V2.xlsx')
+ #   outputData(A, numCoinsList, timeList, 'problem4V2.xlsx')
     '''
     print("Problem 4 for list V2")
     print("Times for each amount:")
@@ -205,7 +205,7 @@ def problem5(function):
         C = function(i, V)
         timeList.append(time.clock() - startTime)
         numCoinsList.append(sum(C))
-    outputData(A, numCoinsList, timeList, 'problem5.xlsx')
+#    outputData(A, numCoinsList, timeList, 'problem5.xlsx')
     '''
     print("Problem 5")
     print("Times for each amount:")
